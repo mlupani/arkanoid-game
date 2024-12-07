@@ -12,6 +12,8 @@ const BALL_SPEED = 3;
 canvas.width = 448;
 canvas.height = 400;
 
+let PAUSE = false;
+
 // variables de la pelota
 const ballRadius = 4;
 
@@ -191,6 +193,18 @@ function initEVents () {
         } else if(event.key === 'Left' || event.key === 'ArrowLeft'){
             leftPressed = true;
         }
+
+        if((event.key === 'Enter' || event.key === 'p' || event.code === 'Space')){
+            PAUSE = !PAUSE;
+            if(!PAUSE){
+                draw();
+            }
+        }
+
+        if(event.key === 'r'){
+            document.location.reload();
+        }
+
     }
 
     function keyUpHandler(event) {
@@ -203,6 +217,9 @@ function initEVents () {
 }
 
 function draw() {
+    if(PAUSE){
+        return;
+    }
     cleanCanvas();
     // hay que dibujar los elementos
     drawBall();
